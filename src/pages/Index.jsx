@@ -5,6 +5,7 @@ import AboutSection from "../components/AboutSection";
 import ContactSection from "../components/ContactSection";
 import Projects from "../components/Projects";
 import { TheContextProvider } from "../context/ThemeContextProvider";
+import Footer from "../components/Footer";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
         <Projects />
         <ContactSection />
       </TheContextProvider>
+      <Footer />
     </>
   );
 };

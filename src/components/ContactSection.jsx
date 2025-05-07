@@ -15,8 +15,8 @@ const ContactSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setIsSubmitting(true);
-    // setIsSubmitting(false);
+    setIsSubmitting(true);
+    setIsSubmitting(false);
     toast("✅ sucess", {
       description: "Your message has been sent successfully!",
       action: {
@@ -209,7 +209,7 @@ const ContactSection = () => {
                 <Button
                   type="submit"
                   className="w-full"
-                  // disabled={isSubmitting}
+                  disabled={isSubmitting}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
