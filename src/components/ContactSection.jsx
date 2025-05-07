@@ -1,22 +1,45 @@
-import React from "react";
+import React, { useRef } from "react";
 import { cn } from "../lib/utils";
 import { Button } from "./ui/Buttom";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Linkedin, Github, Twitter } from "lucide-react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
-  const [formData, setFormData] = React.useState({});
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const handleChange = (e) => {};
+  const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
+  const PUBLIC_ID = import.meta.env.VITE_PUBLIC_KEY;
+
+  const form = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    try {
+      emailjs
+        .sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_ID)
+        .then((response) => {
+          console.log(
+            "Email sent successfully!",
+            response.status,
+            response.text
+          );
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
     setIsSubmitting(false);
+    setName("");
+    setEmail("");
+    setMessage("");
     toast("✅ sucess", {
       description: "Your message has been sent successfully!",
       action: {
@@ -161,7 +184,7 @@ const ContactSection = () => {
                 Send a Message
               </h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">
                     Your Name
@@ -169,8 +192,8 @@ const ContactSection = () => {
                   <Input
                     id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="John Doe"
                     required
                   />
@@ -184,8 +207,8 @@ const ContactSection = () => {
                     id="email"
                     name="email"
                     type="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
                     required
                   />
@@ -198,8 +221,8 @@ const ContactSection = () => {
                   <Textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     placeholder="I'd like to discuss a project..."
                     rows={5}
                     required

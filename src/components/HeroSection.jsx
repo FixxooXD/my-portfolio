@@ -10,7 +10,7 @@ const HeroSection = () => {
         className="min-h-screen flex justify-center items-center"
       >
         <div className="section-container">
-          <div className="pl-1 sm:pl-0 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="pl-1 lg:pl-4 sm:pl-0 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold leading-tight">
                 Hi, I'm <span className="text-primary">Raj Palmal</span>

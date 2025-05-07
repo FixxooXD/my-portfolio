@@ -50,7 +50,7 @@ const Projects = () => {
 
   return (
     <>
-      <section id="projects" className="py-16 sm:py-24 px-4  sm:px-10 border">
+      <section id="projects" className="py-16 sm:py-24 px-4  sm:px-10 ">
         <div className="section-container">
           <div className="max-w-xl mx-auto text-center mb-16 animate-fade-in">
             <h2 className="heading text-3xl sm:text-4xl mb-4">
